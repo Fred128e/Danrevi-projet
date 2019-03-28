@@ -36,7 +36,7 @@ namespace Danrevi.Controllers
 
         // GET: api/Courses/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetCourses([FromRoute] int id)
+        public async Task<IActionResult> GetCourse([FromRoute] int id)
         {
             if(!ModelState.IsValid)
             {
@@ -113,9 +113,9 @@ namespace Danrevi.Controllers
                 return StatusCode(500,"Error when adding course. Please try again.");
             }
 
-            var returnGame = Mapper.Map<CourseDto>(newCourse);
+            var returnCourse = Mapper.Map<CourseDto>(newCourse);
 
-            return CreatedAtAction("AddCourse",new { id = returnGame.Id },returnGame);
+            return CreatedAtAction("GetCourse",new { id = returnCourse.Id },returnCourse);
         }
 
         // DELETE: api/Courses/5
