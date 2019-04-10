@@ -18,6 +18,7 @@ using MySql.Data.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Danrevi.Services;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace Danrevi
 {
@@ -34,6 +35,17 @@ namespace Danrevi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyCorsPolicy",builder =>
+                {
+                    builder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("https://localhost:3000");
+                });
+            });
             services.AddDbContext<danrevi_webContext>(options => options.UseMySql(Configuration.GetConnectionString("SqlConn")));
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -66,6 +78,8 @@ namespace Danrevi
             app.UseSwagger();
 
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json","Video Game API V1"); });
+            app.UseCors("MyCorsPolicy");
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }

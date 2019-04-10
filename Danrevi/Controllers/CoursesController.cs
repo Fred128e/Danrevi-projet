@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace Danrevi.Controllers
 {
+    [EnableCors("MyCorsPolicy")]
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController : ControllerBase
