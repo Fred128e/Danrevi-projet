@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Cors;
 
 namespace Danrevi.Controllers
 {
-    [EnableCors("MyCorsPolicy")]
+    [EnableCors("AllowAllOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class CoursesController : ControllerBase
@@ -27,6 +27,7 @@ namespace Danrevi.Controllers
         }
 
         // GET: api/Courses
+        [EnableCors("AllowAllOrigins")]
         [HttpGet]
         public async Task<IActionResult> GetCourses()
         {
@@ -36,6 +37,7 @@ namespace Danrevi.Controllers
         }
 
         // GET: api/Courses/5
+        [EnableCors("AllowAllOrigins")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCourse([FromRoute] int id)
         {
@@ -58,6 +60,7 @@ namespace Danrevi.Controllers
         }
 
         // PUT: api/Courses/5
+        [EnableCors("AllowAllOrigins")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCourses([FromRoute] int id, [FromBody] Courses course)
         {
@@ -92,6 +95,7 @@ namespace Danrevi.Controllers
         }
 
         // POST: api/Courses
+        [EnableCors("AllowAllOrigins")]
         [HttpPost]
         public async Task<IActionResult> AddCourse([FromBody] Courses courses)
         {
@@ -120,6 +124,7 @@ namespace Danrevi.Controllers
         }
 
         // DELETE: api/Courses/5
+        [EnableCors("AllowAllOrigins")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCourses([FromRoute] int id)
         {
